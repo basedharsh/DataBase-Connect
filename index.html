@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Open Files</title>
+    <style>
+        /* Center the iframe */
+        #fileFrame {
+            display: block;
+            margin: auto;
+            width: 80%;
+            height: 400px;
+            border: 2px solid #ccc;
+        }
+        /* Center the buttons */
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">Click a button to open a file:</h1>
+
+    <div class="button-container">
+        <button onclick="openFile('trial.php')">Open trial.php</button>
+        <button onclick="openFile('MariaDb.php')">Open MariaDb.php</button>
+        <button onclick="openFile('pgsql.php')">Open pgsql.php</button>
+        <button onclick="openFile('Sql.php')">Open Sql.php</button>
+        <button onclick="openFile('SqlLite.php')">Open SqlLite.php</button>
+    </div>
+
+    <iframe id="fileFrame"></iframe>
+
+    <script>
+        function openFile(fileName) {
+            document.getElementById('fileFrame').src = fileName;
+        }
+    </script>
+
+</body>
+</html>
