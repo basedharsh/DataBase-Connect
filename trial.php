@@ -1,10 +1,24 @@
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Firebase CRUD Operations</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        $(document).ready(function() {
+            // Fetch data from fetch_data.php
+            $.ajax({
+                url: 'fetch_data.php',
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    data.forEach(function(item) {
+                        var listItem = `<li><span id='name_${item.key}'>${item.name}</span> (<span id='email_${item.key}'>${item.email}</span>) <span id='change_${item.key}'><a href='javascript:void(0);' onclick='editData("${item.key}")'>Change</a></span> <a href='delete.php?key=${item.key}'>Delete</a></li>`;
+                        $('ul').append(listItem);
+                    });
+                }
+            });
+        });
+
         function editData(key) {
             var name = document.getElementById("name_" + key).innerText;
             var email = document.getElementById("email_" + key).innerText;
@@ -12,7 +26,7 @@
             document.getElementById("name_" + key).innerHTML = `<input type='text' id='new_name_${key}' value='${name}'>`;
             document.getElementById("email_" + key).innerHTML = `<input type='text' id='new_email_${key}' value='${email}'>`;
             document.getElementById("change_" + key).innerHTML = `<a href='javascript:void(0);' onclick='saveData("${key}")'>Save</a>`;
-        }
+        }              
 
         function saveData(key) {
             var newName = document.getElementById("new_name_" + key).value;
@@ -40,17 +54,7 @@
     <div style="float: left; width: 50%;">
         <h2>Data from Firebase</h2>
         <ul>
-            <?php
-                include('dbcon.php');
-                $references = $database->getReference('users')->getValue();
-                foreach ($references as $key => $reference) {
-                    echo "<li>";
-                    echo "<span id='name_$key'>" . $reference['name'] . "</span> ";
-                    echo "(<span id='email_$key'>" . $reference['email'] . "</span>) ";
-                    echo "<span id='change_$key'><a href='javascript:void(0);' onclick='editData(\"$key\")'>Change</a></span>";
-                    echo " <a href='delete.php?key=$key'>Delete</a></li>";
-                }
-            ?>
+            <!-- Data will be appended here by jQuery -->
         </ul>
     </div>
 
