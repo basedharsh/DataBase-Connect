@@ -24,6 +24,11 @@
     display: block;
     margin-bottom: 10px;
   }
+  .form-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 </style>
 </head>
 <body>
@@ -84,6 +89,15 @@ try {
     $stmt->execute();
   }
 
+  // DELETE data
+  if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete"])) {
+    $deleteRollNo = $_POST["delete_roll_no"];
+
+    $stmt = $conn->prepare("DELETE FROM student WHERE roll_no = :delete_roll_no");
+    $stmt->bindParam(':delete_roll_no', $deleteRollNo);
+    $stmt->execute();
+  }
+
   // SELECT data
   $stmt = $conn->prepare("SELECT * FROM student");
   $stmt->execute();
@@ -101,29 +115,44 @@ $conn = null;
 
 </table>
 
-<h2>Insert Data</h2>
-<form method="POST">
-  <label for="name">Name:</label>
-  <input type="text" name="name" required>
-  <label for="roll_no">Roll No:</label>
-  <input type="text" name="roll_no" required>
-  <label for="marks">Marks:</label>
-  <input type="text" name="marks" required>
-  <input type="submit" name="insert" value="Insert">
-</form>
+<div class="form-container">
+  <div>
+    <h2>Insert Data</h2>
+    <form method="POST">
+      <label for="name">Name:</label>
+      <input type="text" name="name" required>
+      <label for="roll_no">Roll No:</label>
+      <input type="text" name="roll_no" required>
+      <label for="marks">Marks:</label>
+      <input type="text" name="marks" required>
+      <input type="submit" name="insert" value="Insert">
+    </form>
+  </div>
 
-<h2>Update Data</h2>
-<form method="POST">
-  <label for="roll_no">Roll No to Update:</label>
-  <input type="text" name="roll_no" required>
-  <label for="new_name">New Name:</label>
-  <input type="text" name="new_name" required>
-  <label for="new_roll_no">New Roll No:</label>
-  <input type="text" name="new_roll_no" required>
-  <label for="new_marks">New Marks:</label>
-  <input type="text" name="new_marks" required>
-  <input type="submit" name="update" value="Update">
-</form>
+  <div>
+    <h2>Update Data</h2>
+    <form method="POST">
+      <label for="roll_no">Roll No to Update:</label>
+      <input type="text" name="roll_no" required>
+      <label for="new_name">New Name:</label>
+      <input type="text" name="new_name" required>
+      <label for="new_roll_no">New Roll No:</label>
+      <input type="text" name="new_roll_no" required>
+      <label for="new_marks">New Marks:</label>
+      <input type="text" name="new_marks" required>
+      <input type="submit" name="update" value="Update">
+    </form>
+  </div>
+
+  <div>
+    <h2>Delete Data</h2>
+    <form method="POST">
+      <label for="delete_roll_no">Roll No to Delete:</label>
+      <input type="text" name="delete_roll_no" required>
+      <input type="submit" name="delete" value="Delete">
+    </form>
+  </div>
+</div>
 
 </body>
 </html>
