@@ -42,6 +42,7 @@ class ComposerStaticInita9cfa8b5d1d5a587bb5e2355faa68ea6
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Clock\\' => 10,
             'Psr\\Cache\\' => 10,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
         array (
@@ -126,8 +127,8 @@ class ComposerStaticInita9cfa8b5d1d5a587bb5e2355faa68ea6
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -140,6 +141,10 @@ class ComposerStaticInita9cfa8b5d1d5a587bb5e2355faa68ea6
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Monolog\\' => 
         array (
